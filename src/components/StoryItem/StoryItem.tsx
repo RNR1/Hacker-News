@@ -17,12 +17,7 @@ interface Props {
 
 const Item = styled.li`
 	list-style: none;
-	padding-top: 10px;
-`
-
-const Index = styled.span`
-	margin-left: 5px;
-	color: grey;
+	padding-top: 7px;
 `
 
 const Title = styled.div`
@@ -33,6 +28,11 @@ const Title = styled.div`
 	& * {
 		margin-left: 3px;
 	}
+`
+
+const Index = styled.span`
+	margin-left: 10px;
+	color: grey;
 `
 
 const Url = styled(a)`
@@ -46,10 +46,11 @@ const Url = styled(a)`
 `
 
 const Details = styled.div`
-	margin-left: 28px;
+	margin-top: 3px;
+	margin-left: 34px;
 	font-weight: 600;
 	color: grey;
-	font-size: 0.7em;
+	font-size: 0.68em;
 
 	& * {
 		margin-left: 3px;
@@ -62,7 +63,7 @@ const Link = styled(a)`
 `
 
 const StoryItem: FC<Props> = ({ story, index }) => {
-	const hostName = new URL(story.url).hostname
+	const hostName = story.url ? new URL(story.url).hostname : null
 	return (
 		<Item>
 			<Title>

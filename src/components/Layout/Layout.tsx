@@ -7,6 +7,12 @@ const Container = styled.div`
 	margin: 0 auto;
 	width: 85%;
 	font-size: 14px;
+
+	@media (max-width: 750px) {
+		margin: 0;
+		width: 100%;
+		font-size: 15px;
+	}
 `
 
 const Layout: FC = ({ children }) => {
