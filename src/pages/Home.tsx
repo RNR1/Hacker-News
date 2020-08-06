@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import News from '../api/client'
 import { usePaginatedQuery } from 'react-query'
-import { useHistory } from 'react-router-dom'
+import StoryItem from '../components/StoryItem/StoryItem'
+import styled from 'styled-components'
+
+const List = styled.ul`
+	padding-inline-start: 0;
+	margin-block-start: 0;
+	background-color: #f6f6ef;
+`
 
 const Home = () => {
 	const [page, setPage] = useState(0)
-	const history = useHistory()
 
 	const fetchStories = (key: string, page = 0) => News.topStories(30, page * 30)
 
@@ -23,13 +29,11 @@ const Home = () => {
 			) : isError ? (
 				<div>Error: {error!.message!}</div>
 			) : (
-				<div>
-					{resolvedData!.map((story) => (
-						<p key={story.id} onClick={() => history.push(story.id.toString())}>
-							{story.title}
-						</p>
+				<List>
+					{resolvedData!.map((story, i) => (
+						<StoryItem key={story.id} index={i + 1} story={story} />
 					))}
-				</div>
+				</List>
 			)}
 			<span>Current Page: {page + 1}</span>
 			<button

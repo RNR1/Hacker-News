@@ -1,0 +1,13 @@
+.PageNumber {
+	padding: 4px 6px;
+	margin: 0 5px;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px 1px #ccc;
+	border-radius: 20%;
+}
+
+.PageNumber:hover,
+.PageNumber:active,
+.Active {
+	background-color: aliceblue;
+}
