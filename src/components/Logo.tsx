@@ -1,9 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 
-const Img = styled.img`
-	border: 1px solid white;
-`
+import { Img } from '../styles/Styled'
 
 const Logo = () => {
 	return <Img src='https://news.ycombinator.com/y18.gif' alt='Hacker News' />
