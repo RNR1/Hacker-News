@@ -1,4 +1,5 @@
 export default interface Story {
+	index?: number
 	by: string
 	descendants: number
 	id: number
@@ -8,5 +9,4 @@ export default interface Story {
 	title: string
 	type: string
 	url: string
-	hasMore?: boolean
 }

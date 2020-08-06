@@ -6,13 +6,18 @@ const client = axios.create({
 })
 
 const News = {
-	topStories: (limit: number, offset: number) =>
+	topStories: (limit: number, page: number) =>
 		client.get<number[]>('/topstories.json').then(({ data }) => {
 			const storyPromises: Promise<Story>[] = []
+			const indexOfLastPost = page * limit
+			let indexOfFirstPost = indexOfLastPost - limit
+
 			data
-				.slice(offset, limit)
+				.slice(indexOfFirstPost, indexOfLastPost)
 				.forEach((id) => storyPromises.push(News.story(id)))
-			return Promise.all(storyPromises)
+			return Promise.all(storyPromises).then((stories) =>
+				stories.map((story) => ({ ...story, index: ++indexOfFirstPost }))
+			)
 		}),
 	story: (id: number) =>
 		client.get<Story>(`/item/${id}.json`).then(({ data }) => data)

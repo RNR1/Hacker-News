@@ -10,18 +10,28 @@ const List = styled.ul`
 	background-color: #f6f6ef;
 `
 
+const Item = styled.li`
+	list-style: none;
+	padding-top: 7px;
+`
+
+const Button = styled.button`
+	border: none;
+	background-color: transparent;
+	margin-left: 34px;
+	margin-top: 5px;
+	padding: 10px;
+`
+
 const Home = () => {
-	const [page, setPage] = useState(0)
+	const [page, setPage] = useState(1)
 
-	const fetchStories = (key: string, page = 0) => News.topStories(30, page * 30)
+	const fetchStories = (key: string, page = 1) => News.topStories(30, page)
 
-	const {
-		isLoading,
-		isError,
-		error,
-		resolvedData,
-		isFetching
-	} = usePaginatedQuery(['fetchTopStories', page], fetchStories)
+	const { isLoading, isError, error, resolvedData } = usePaginatedQuery(
+		['fetchTopStories', page],
+		fetchStories
+	)
 	return (
 		<div>
 			{isLoading ? (
@@ -30,19 +40,14 @@ const Home = () => {
 				<div>Error: {error!.message!}</div>
 			) : (
 				<List>
-					{resolvedData!.map((story, i) => (
-						<StoryItem key={story.id} index={i + 1} story={story} />
+					{resolvedData!.map((story) => (
+						<StoryItem key={story.id} index={story.index} story={story} />
 					))}
+					<Item>
+						<Button onClick={() => setPage((old) => old + 1)}>More</Button>
+					</Item>
 				</List>
 			)}
-			<span>Current Page: {page + 1}</span>
-			<button
-				onClick={() => setPage((old) => Math.max(old - 1, 0))}
-				disabled={page === 0}>
-				Previous Page
-			</button>{' '}
-			<button onClick={() => setPage((old) => old + 1)}>Next Page</button>
-			{isFetching ? <span> Loading...</span> : null}{' '}
 		</div>
 	)
 }

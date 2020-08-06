@@ -1,6 +1,7 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC } from 'react'
 import Logo from '../Logo/Logo'
 import styled from 'styled-components'
+import { ContentList } from '../ContentList/ContentList'
 
 const Nav = styled.nav`
 	background-color: #ff6700;
@@ -18,6 +19,8 @@ const LogoContainer = styled.div`
 	height: 100%;
 	display: flex;
 	align-items: center;
+	margin-left: 2px;
+	margin-right: 5px;
 `
 
 const List = styled.ul`
@@ -30,7 +33,7 @@ const List = styled.ul`
 	list-style: none;
 `
 
-const Item = styled.li<{ logo?: boolean }>`
+export const Item = styled.li<{ logo?: boolean }>`
 	display: flex;
 	align-items: center;
 	padding: 2px;
@@ -40,15 +43,16 @@ const Item = styled.li<{ logo?: boolean }>`
 const Title = styled.strong`
 	margin-left: 3px;
 `
-const items = [
-	{ label: 'new', to: '/' },
-	{ label: 'past', to: '/' },
-	{ label: 'comments', to: '/' },
-	{ label: 'ask', to: '/' },
-	{ label: 'show', to: '/' },
-	{ label: 'jobs', to: '/' },
-	{ label: 'submit', to: '/' }
+const navbarContent = [
+	'new',
+	'past',
+	'comments',
+	'ask',
+	'show',
+	'jobs',
+	'submit'
 ]
+
 const Navbar: FC = () => {
 	return (
 		<Nav>
@@ -57,12 +61,7 @@ const Navbar: FC = () => {
 				<Title>Hacker News</Title>
 			</LogoContainer>
 			<List>
-				{items.map(({ label }, i) => (
-					<Fragment key={i.toString()}>
-						<Item>{label}</Item>
-						{i !== items.length - 1 && <Item> | </Item>}
-					</Fragment>
-				))}
+				<ContentList items={navbarContent} />
 			</List>
 		</Nav>
 	)
