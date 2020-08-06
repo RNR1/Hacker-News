@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Link as a } from 'react-router-dom'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
@@ -35,7 +34,7 @@ const Index = styled.span`
 	color: grey;
 `
 
-const Url = styled(a)`
+const Url = styled.a`
 	color: grey;
 	text-decoration: none;
 	font-size: 0.8em;
@@ -57,7 +56,7 @@ const Details = styled.div`
 	}
 `
 
-const Link = styled(a)`
+const Link = styled.a`
 	color: black;
 	text-decoration: none;
 `
@@ -69,8 +68,10 @@ const StoryItem: FC<Props> = ({ story, index }) => {
 			<Title>
 				<Index>{index}.</Index>
 				<FontAwesomeIcon icon={faCaretUp} color='grey' />
-				<Link to={`/story/${story.id}`}>{story.title}</Link>
-				<Url to={`/${hostName}`}>({hostName})</Url>
+				<Link href={story.url} target='_blank'>
+					{story.title}
+				</Link>
+				<Url href='#'>({hostName})</Url>
 			</Title>
 			<Details>
 				<span>{story.score} points</span>

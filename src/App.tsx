@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from './components/Layout/Layout'
-import Routes from './routes/Routes'
+import Home from './pages/Home'
 
 function App() {
 	return (
 		<Layout>
-			<Routes />
+			<Home />
 		</Layout>
 	)
 }
