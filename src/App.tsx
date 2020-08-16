@@ -1,10 +1,29 @@
 import React, { useState } from 'react'
 import { usePaginatedQuery } from 'react-query'
+import styled from 'styled-components'
 
 import Layout from './components/Layout'
 import News from './api/client'
 import StoryItem from './components/StoryItem'
-import { StoryList, Item, Button } from './styles/Styled'
+
+const StoryList = styled.ul`
+	padding-inline-start: 0;
+	margin-block-start: 0;
+	background-color: #f6f6ef;
+
+	& li {
+		list-style: none;
+		padding-top: 7px;
+	}
+
+	& button {
+		border: none;
+		background-color: transparent;
+		margin-left: 34px;
+		margin-top: 5px;
+		padding: 10px;
+	}
+`
 
 function App() {
 	const [page, setPage] = useState(1)
@@ -26,9 +45,9 @@ function App() {
 						{resolvedData!.map((story) => (
 							<StoryItem key={story.id} index={story.index} story={story} />
 						))}
-						<Item>
-							<Button onClick={() => setPage((old) => old + 1)}>More</Button>
-						</Item>
+						<li>
+							<button onClick={() => setPage((old) => old + 1)}>More</button>
+						</li>
 					</StoryList>
 				)}
 			</div>

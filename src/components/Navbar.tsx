@@ -1,7 +1,42 @@
 import React, { FC } from 'react'
+import styled from 'styled-components'
+
 import Logo from './Logo'
 import { ContentList } from './ContentList'
-import { Nav, List, LogoContainer, Title } from '../styles/Styled'
+
+export const Nav = styled.nav`
+	background-color: #ff6700;
+	height: 24px;
+	font-size: 1.1em;
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 750px) {
+		height: 42px;
+	}
+
+	& .content {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		padding-inline-start: 0;
+		margin-block-start: 0;
+		margin-block-end: 0;
+		list-style: none;
+	}
+
+	& .logo-container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		margin-left: 2px;
+		margin-right: 5px;
+
+		& strong {
+			margin-left: 3px;
+		}
+	}
+`
 
 const navbarContent = [
 	'new',
@@ -16,13 +51,13 @@ const navbarContent = [
 const Navbar: FC = () => {
 	return (
 		<Nav>
-			<LogoContainer>
+			<div className='logo-container'>
 				<Logo />
-				<Title>Hacker News</Title>
-			</LogoContainer>
-			<List>
+				<strong>Hacker News</strong>
+			</div>
+			<ul className='content'>
 				<ContentList items={navbarContent} />
-			</List>
+			</ul>
 		</Nav>
 	)
 }

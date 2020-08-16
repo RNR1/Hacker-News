@@ -3,9 +3,9 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
 
 import Story from '../models/Story'
-import { Item, StoryTitle, Index, Url, Details, Link } from '../styles/Styled'
 
 dayjs.extend(relativeTime)
 
@@ -14,17 +14,65 @@ interface Props {
 	story: Story
 }
 
+const StoryTitle = styled.div`
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: 500;
+	font-size: 0.95em;
+
+	& * {
+		margin-left: 3px;
+	}
+
+	& .index {
+		margin-left: 10px;
+		color: grey;
+	}
+
+	& .link {
+		color: black;
+		text-decoration: none;
+	}
+
+	& .grey {
+		color: grey;
+		text-decoration: none;
+		font-size: 0.8em;
+	}
+
+	& .grey:hover {
+		text-decoration: underline;
+	}
+`
+
+const Details = styled.div`
+	margin-top: 3px;
+	margin-left: 34px;
+	font-weight: 600;
+	color: grey;
+	font-size: 0.68em;
+
+	& * {
+		margin-left: 3px;
+	}
+`
+
 const StoryItem: FC<Props> = ({ story, index }) => {
 	const hostName = story.url ? new URL(story.url).hostname : null
 	return (
-		<Item>
+		<li>
 			<StoryTitle>
-				<Index>{index}.</Index>
+				<span className='index'>{index}.</span>
 				<FontAwesomeIcon icon={faCaretUp} color='grey' />
-				<Link href={story.url} target='_blank'>
+				<a
+					className='link'
+					href={story.url}
+					target='_blank'
+					rel='noopener noreferrer'>
 					{story.title}
-				</Link>
-				<Url href='#'>({hostName})</Url>
+				</a>
+				<a className='link grey' href='#host'>
+					({hostName})
+				</a>
 			</StoryTitle>
 			<Details>
 				<span>{story.score} points</span>
@@ -33,7 +81,7 @@ const StoryItem: FC<Props> = ({ story, index }) => {
 				<span>| hide</span>
 				<span>| {story.descendants} comments</span>
 			</Details>
-		</Item>
+		</li>
 	)
 }
 

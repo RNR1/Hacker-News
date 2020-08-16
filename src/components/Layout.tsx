@@ -1,9 +1,22 @@
 import React, { FC } from 'react'
+import styled from 'styled-components'
 import { ReactQueryDevtools } from 'react-query-devtools'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { Container } from '../styles/Styled'
+
+const Container = styled.div`
+	margin: 0 auto;
+	width: 85%;
+	font-size: 14px;
+	background-color: #f6f6ef;
+
+	@media (max-width: 750px) {
+		margin: 0;
+		width: 100%;
+		font-size: 15px;
+	}
+`
 
 const Layout: FC = ({ children }) => {
 	return (

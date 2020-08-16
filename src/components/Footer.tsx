@@ -1,7 +1,7 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { ContentList } from './ContentList'
-import { Line, CenteredList } from '../styles/Styled'
 
 const footerContent = [
 	'Guidelines',
@@ -16,14 +16,36 @@ const footerContent = [
 	'Contact'
 ]
 
+const Container = styled.div`
+	& .line {
+		border: none;
+		border-top: 3px solid #ff6600;
+		color: #ff6600;
+		overflow: visible;
+		height: 5px;
+	}
+
+	& .content {
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		display: flex;
+		padding-inline-start: 0;
+		margin-block-start: 0;
+		margin-block-end: 0;
+		list-style: none;
+	}
+`
+
 const Footer = () => {
 	return (
-		<div>
-			<Line />
-			<CenteredList>
+		<Container>
+			<hr className='line' />
+			<ul className='content'>
 				<ContentList items={footerContent} />
-			</CenteredList>
-		</div>
+			</ul>
+		</Container>
 	)
 }
 

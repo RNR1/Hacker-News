@@ -1,6 +1,11 @@
 import React, { FC, Fragment } from 'react'
+import styled from 'styled-components'
 
-import { NavItem } from '../styles/Styled'
+export const NavItem = styled.li`
+	display: flex;
+	align-items: center;
+	padding: 2px;
+`
 
 export const ContentList: FC<{ items: string[] }> = ({ items }) => {
 	return (
