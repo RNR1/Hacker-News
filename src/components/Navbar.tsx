@@ -36,6 +36,12 @@ export const Nav = styled.nav`
 			margin-left: 3px;
 		}
 	}
+
+	@media (max-width: 750px) {
+		.content {
+			display: none;
+		}
+	}
 `
 
 const navbarContent = [

@@ -6,18 +6,21 @@ import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 
 import Story from '../models/Story'
+import { summarizeText } from '../helpers/string'
 
 dayjs.extend(relativeTime)
 
 interface Props {
-	index: number
 	story: Story
+	isSmallScreen: boolean
 }
 
 const StoryTitle = styled.div`
 	font-family: Verdana, Geneva, sans-serif;
 	font-weight: 500;
 	font-size: 0.95em;
+	display: flex;
+	flex-wrap: wrap;
 
 	& * {
 		margin-left: 3px;
@@ -56,23 +59,25 @@ const Details = styled.div`
 	}
 `
 
-const StoryItem: FC<Props> = ({ story, index }) => {
+const StoryItem: FC<Props> = ({ story, isSmallScreen }) => {
 	const hostName = story.url ? new URL(story.url).hostname : null
 	return (
 		<li>
 			<StoryTitle>
-				<span className='index'>{index}.</span>
+				<span className='index'>{story.index}.</span>
 				<FontAwesomeIcon icon={faCaretUp} color='grey' />
 				<a
 					className='link'
 					href={story.url}
 					target='_blank'
 					rel='noopener noreferrer'>
-					{story.title}
+					{isSmallScreen ? summarizeText(story.title, 32) : story.title}
 				</a>
-				<a className='link grey' href='#host'>
-					({hostName})
-				</a>
+				{hostName && !isSmallScreen && (
+					<a className='link grey' href='#host'>
+						({hostName})
+					</a>
+				)}
 			</StoryTitle>
 			<Details>
 				<span>{story.score} points</span>
